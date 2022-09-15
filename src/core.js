@@ -49,33 +49,45 @@ function estimatePrepTime(ingredients, preptime = 2) {
 // returns: { sugar: 0, eggs: 6 }
 
 function calculateQuantities(ingredients, numOfLayers) {
-  let sugarAlertVar = false
-  let eggsAlertVar = false
-  const sugar = 100 * numOfLayers
-  const eggs = 2 * numOfLayers
-  const object = {}
-  for (let i = 0; i < ingredients.length; i++) {
-    if (ingredients[i] === 'sugar') {
-      sugarAlertVar = true
-    } else if (ingredients[i] === 'eggs') {
-      eggsAlertVar = true
-    }
+  const object = { sugar: 0, eggs: 0 }
+  if (ingredients.includes('sugar')) {
+    object.sugar = 100 * numOfLayers
   }
-
-  if (sugarAlertVar) {
-    object.sugar = sugar
-  } else if (!sugarAlertVar) {
-    object.sugar = 0
+  if (ingredients.includes('eggs')) {
+    object.eggs = 2 * numOfLayers
   }
-
-  if (eggsAlertVar) {
-    object.eggs = eggs
-  } else if (!eggsAlertVar) {
-    object.eggs = 0
-  }
-
   return object
 }
+console.log(calculateQuantities(['sugar', 'milk', 'eggs'], 2))
+
+// function calculateQuantities(ingredients, numOfLayers) {
+//   let sugarAlertVar = false
+//   let eggsAlertVar = false
+//   const sugar = 100 * numOfLayers
+//   const eggs = 2 * numOfLayers
+//   const object = {}
+//   for (let i = 0; i < ingredients.length; i++) {
+//     if (ingredients[i] === 'sugar') {
+//       sugarAlertVar = true
+//     } else if (ingredients[i] === 'eggs') {
+//       eggsAlertVar = true
+//     }
+//   }
+
+//   if (sugarAlertVar) {
+//     object.sugar = sugar
+//   } else if (!sugarAlertVar) {
+//     object.sugar = 0
+//   }
+
+//   if (eggsAlertVar) {
+//     object.eggs = eggs
+//   } else if (!eggsAlertVar) {
+//     object.eggs = 0
+//   }
+
+//   return object
+// }
 
 // 4. Phil's cake is pretty small and only provides 1 portion. He wants to make a bigger one!
 // Create a function named improveRecipe that accepts two parameters:
