@@ -5,6 +5,16 @@
 // "The cake is still baking!" if there are any remaining minutes left,
 // or "You didn't set a timer!" if no value is provided to the parameter
 
+function timerStatus(remainingMinutes) {
+  if (remainingMinutes === 0) {
+    return "Phil's cake is ready!"
+  } else if (remainingMinutes > 0) {
+    return 'The cake is still baking!'
+  } else if (!remainingMinutes) {
+    return "You didn't set a timer!"
+  }
+}
+
 // 2. To help Phil prepare ahead of time, create a function named estimatePrepTime
 // that accepts two parameters:
 // - an array of ingredients (e.g. ["sugar", "milk", "flour", "eggs"])
@@ -13,6 +23,14 @@
 // number of ingredients provided and the prep time per ingredient.
 // If no prep time per ingredient is provided, the function should assume each ingredient
 // takes 2 minutes to prepare
+
+function estimatePrepTime(ingredients, prepTime = 2) {
+  let wholePrepTime = 0
+  for (let i = 0; i < ingredients.length; i++) {
+    wholePrepTime += prepTime
+  }
+  return wholePrepTime
+}
 
 // 3. Phil needs to know the quantity of milk and eggs to use! Create a function
 // named calculateQuantities which accepts two parameters:
@@ -30,6 +48,18 @@
 // calculateQuantities(["milk", "eggs"], 3)
 // returns: { sugar: 0, eggs: 6 }
 
+function calculateQuantities(ingredients, numLayers) {
+  const requiredIngredients = { sugar: 0, eggs: 0 }
+
+  if (ingredients.includes('sugar')) {
+    requiredIngredients.sugar = 100 * numLayers
+  }
+  if (ingredients.includes('eggs')) {
+    requiredIngredients.eggs = 2 * numLayers
+  }
+  return requiredIngredients
+}
+
 // 4. Phil's cake is pretty small and only provides 1 portion. He wants to make a bigger one!
 // Create a function named improveRecipe that accepts two parameters:
 // - an object where the keys are ingredients and the values are quantities
@@ -42,7 +72,13 @@
 // Example:
 // improveRecipe({ eggs: 2, milk: 100, sugar: 200 }, 3)
 // returns: { eggs: 6, milk: 300, sugar: 600 }
-
+function improveRecipe(ingredients, portion) {
+  const updatedIngredients = {}
+  for (const [key, value] of Object.entries(ingredients)) {
+    updatedIngredients[key] = value * portion
+  }
+  return updatedIngredients
+}
 // Don't change the code below this line
 module.exports = {
   /* eslint-disable no-undef */
