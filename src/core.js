@@ -6,14 +6,14 @@
 // or "You didn't set a timer!" if no value is provided to the parameter
 
 function timerStatus(minsLeft) {
-  if (!minsLeft) {
-    return "You didn't set a timer!"
-  }
   if (minsLeft === 0) {
     return "Phil's cake is ready!"
   }
   if (minsLeft > 0) {
     return 'The cake is still baking!'
+  }
+  if (!minsLeft) {
+    return "You didn't set a timer!"
   }
 }
 // 2. To help Phil prepare ahead of time, create a function named estimatePrepTime
@@ -27,7 +27,9 @@ function timerStatus(minsLeft) {
 
 function estimatePrepTime(ingredients, prepTime) {
   let total = 0
-  total = prepTime * ingredients.length - 1
+  if (!prepTime) {
+    total = 2 * ingredients.length
+  } else total = prepTime * ingredients.length
   return total
 }
 
@@ -46,7 +48,17 @@ function estimatePrepTime(ingredients, prepTime) {
 //
 // calculateQuantities(["milk", "eggs"], 3)
 // returns: { sugar: 0, eggs: 6 }
-function calculateQuantities(ingredients, layers) {}
+function calculateQuantities(ingredients, layers) {
+  const requiredIngredients = { sugar: 0, eggs: 0 }
+
+  if (ingredients.includes('sugar')) {
+    requiredIngredients.sugar = 100 * layers
+  }
+  if (ingredients.includes('eggs')) {
+    requiredIngredients.eggs = 2 * layers
+  }
+  return requiredIngredients
+}
 
 // 4. Phil's cake is pretty small and only provides 1 portion. He wants to make a bigger one!
 // Create a function named improveRecipe that accepts two parameters:
@@ -60,7 +72,13 @@ function calculateQuantities(ingredients, layers) {}
 // Example:
 // improveRecipe({ eggs: 2, milk: 100, sugar: 200 }, 3)
 // returns: { eggs: 6, milk: 300, sugar: 600 }
-
+function improveRecipe(ingredients, portion) {
+  const recipeIngredients = {}
+  for (const [key, value] of Object.entries(ingredients)) {
+    recipeIngredients[key] = value * portion
+  }
+  return recipeIngredients
+}
 // Don't change the code below this line
 module.exports = {
   /* eslint-disable no-undef */
