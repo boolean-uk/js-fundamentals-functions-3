@@ -5,6 +5,16 @@
 // "The cake is still baking!" if there are any remaining minutes left,
 // or "You didn't set a timer!" if no value is provided to the parameter
 
+function timerStatus(remainingMinutes) {
+  if (remainingMinutes === 0) {
+    return "Phil's cake is ready!";
+  } else if (remainingMinutes > 0) {
+    return "The cake is still baking!";
+  } else {
+    return "You didn't set a timer!";
+  }
+}
+
 // 2. To help Phil prepare ahead of time, create a function named estimatePrepTime
 // that accepts two parameters:
 // - an array of ingredients (e.g. ["sugar", "milk", "flour", "eggs"])
@@ -13,6 +23,10 @@
 // number of ingredients provided and the prep time per ingredient.
 // If no prep time per ingredient is provided, the function should assume each ingredient
 // takes 2 minutes to prepare
+function estimatePrepTime(ingredientList, prepTime = 2) {
+  return ingredientList.length * prepTime;
+}
+
 
 // 3. Phil needs to know the quantity of milk and eggs to use! Create a function
 // named calculateQuantities which accepts two parameters:
@@ -22,6 +36,23 @@
 // The function should always return an object with two keys: sugar, eggs
 // The values of the keys should be the total amount of sugar and eggs needed for the cake.
 // If sugar or eggs are not present in the list of ingredients, the value for the key should be 0
+
+function calculateQuantities(ingredientList, numLayers) {
+  const obj = {}
+  if (ingredientList.includes('sugar')) {
+    obj.sugar = 100 * numLayers;
+  } else {
+    obj.sugar = 0;
+  }
+  if (ingredientList.includes('eggs')) {
+    obj.eggs = 2 * numLayers;
+  } else {
+    obj.eggs = 0;
+  }
+  return obj;
+}
+
+
 //
 // Example:
 // calculateQuantities(["sugar", "milk", "eggs"], 2)
@@ -38,7 +69,13 @@
 //
 // The function should return a new object with the same keys as the recipe provided,
 // but the values should have updated amounts to make sure the cake provides enough portions.
-//
+ function improveRecipe(recipe, portions){
+    for(const ingredient in recipe){
+      recipe[ingredient] *= portions
+    }
+    return recipe
+ }
+
 // Example:
 // improveRecipe({ eggs: 2, milk: 100, sugar: 200 }, 3)
 // returns: { eggs: 6, milk: 300, sugar: 600 }
