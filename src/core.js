@@ -57,56 +57,25 @@ const estimatePrepTime = (ingredients, preptime) => {
 const calculateQuantities = (ingredients, layers) => {
   //sugar x 100
   //eggs x 2
-  let ingObject = {
-    sugar: 0,
-    eggs: 0
+  let ingObject = {}
+
+  if (ingredients.includes('sugar')) {
+    ingObject.sugar = 100 * layers
+  } else {
+    ingObject.sugar = 0
   }
 
-  let layerCounter = Math.floor(layers / 2)
-
-  if (layerCounter < 2) {
-    layerCounter = 2
+  if (ingredients.includes('eggs')) {
+    ingObject.eggs = 2 * layers
+  } else {
+    ingObject.eggs = 0
   }
 
-  for (let i = 0; i < ingredients.length; i++) {
-    if (ingredients.includes('eggs') && ingredients.includes('sugar')) {
-      console.log(layerCounter)
-      ingObject.sugar = layers * 100
-      ingObject.eggs = layers * 2
-    }
-    else if (!ingredients.includes('eggs') && ingredients.includes('sugar')
-
-    ) {
-      ingObject.sugar = layers * 100
-      ingObject.eggs = 0
-    } else if (ingredients.includes('eggs') && !ingredients.includes('sugar')) {
-      ingObject.sugar = 0
-      ingObject.eggs = layers * 2
-    } else if (!ingredients.includes('eggs') && !ingredients.includes('sugar')) {
-      ingObject.sugar = 0
-      ingObject.eggs = 0
-    }
-
-
-
-    // if (ingArray[i] === "sugar") {
-    //   let layerCounter = layers / 2
-
-
-    //   ingObject.sugar = layerCounter * 100
-
-    // } else if (ingArray[i] === "eggs") {
-    //   ingObject.eggs = layers * 2
-    // } else {
-    //   ingObject[ingArray[i]] = 0
-    // }
-
-  }
-
-  console.log(ingObject)
+  // console.table(ingObject)
+  return ingObject
 }
-console.log()
-calculateQuantities(["sufgar", "milk", "eggs"], 2)
+
+calculateQuantities(["suggar", "milk", "egg4s"], 2)
 
 
 // 4. Phil's cake is pretty small and only provides 1 portion. He wants to make a bigger one!
@@ -124,15 +93,15 @@ calculateQuantities(["sufgar", "milk", "eggs"], 2)
 
 
 const improveRecipe = (obj, portions) => {
-  //   let newObj = {}
-  //   for (const [key, value] of Object.entries(obj)) {
-  //     newObj[key] = value * portions
-  //   }
+  let newObj = {}
+  for (const [key, value] of Object.entries(obj)) {
+    newObj[key] = value * portions
+  }
 
-  // console.log(newObj)
+  return newObj
 }
 
-// improveRecipe({ eggs: 2, milk: 100, sugar: 200 }, 7)
+improveRecipe({ eggs: 2, milk: 100, sugar: 200 }, 2)
 
 // Don't change the code below this line
 module.exports = {

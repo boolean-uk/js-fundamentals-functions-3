@@ -1,0 +1,43 @@
+
+  let layerCounter = Math.floor(layers / 2)
+
+  if (layerCounter < 2) {
+    layerCounter = 2
+  }
+
+  for (let i = 0; i < ingredients.length; i++) {
+    if (ingredients.includes('eggs') && ingredients.includes('sugar')) {
+      console.log(layerCounter)
+      ingObject.sugar = layers * 100
+      ingObject.eggs = layers * 2
+    }
+    else if (!ingredients.includes('eggs') && ingredients.includes('sugar')
+
+    ) {
+      ingObject.sugar = layers * 100
+      ingObject.eggs = 0
+    } else if (ingredients.includes('eggs') && !ingredients.includes('sugar')) {
+      ingObject.sugar = 0
+      ingObject.eggs = layers * 2
+    } else if (!ingredients.includes('eggs') && !ingredients.includes('sugar')) {
+      ingObject.sugar = 0
+      ingObject.eggs = 0
+    }
+
+
+
+    // if (ingArray[i] === "sugar") {
+    //   let layerCounter = layers / 2
+
+
+    //   ingObject.sugar = layerCounter * 100
+
+    // } else if (ingArray[i] === "eggs") {
+    //   ingObject.eggs = layers * 2
+    // } else {
+    //   ingObject[ingArray[i]] = 0
+    // }
+
+  }
+
+  console.log(ingObject)
