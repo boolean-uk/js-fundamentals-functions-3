@@ -26,7 +26,7 @@ function timerStatus(timerRemain) {
 // If no prep time per ingredient is provided, the function should assume each ingredient
 // takes 2 minutes to prepare
 function estimatePrepTime(ingredients, prepPer) {
-  const countIngredients = ingredients.count
+  const countIngredients = ingredients.length
   let timePerIngredient = prepPer
   if (prepPer === null || prepPer === undefined || prepPer === 0) {
     timePerIngredient = 2
@@ -72,8 +72,10 @@ function calculateQuantities(basketIngredients, layers) {
     specialIngredients.eggs = specialIngredients.eggs * cakeLayers
   } else if (haveSugar === true && haveEggs === false) {
     specialIngredients.eggs = 0
+    specialIngredients.sugar = specialIngredients.sugar * cakeLayers
   } else if (haveSugar === false && haveEggs === true) {
     specialIngredients.sugar = 0
+    specialIngredients.eggs = specialIngredients.eggs * cakeLayers
   }
 
   return specialIngredients
@@ -91,12 +93,8 @@ function calculateQuantities(basketIngredients, layers) {
 // improveRecipe({ eggs: 2, milk: 100, sugar: 200 }, 3)
 // returns: { eggs: 6, milk: 300, sugar: 600 }
 function improveRecipe(recipe, number) {
-  const Object = {
-    eggs: 2,
-    milk: 100,
-    sugar: 250,
-    flour: 160
-  }
+  const newobj = Object.keys(recipe)
+
   const portions = number
   /** const improvedObject = {
     eggs:object.eggs * number,
@@ -105,21 +103,14 @@ function improveRecipe(recipe, number) {
     flour:object.flour * number
   }**/
   if (portions === 1) {
-    Object.eggs = 0
-    Object.milk = 0
-    Object.sugar = 0
-    Object.flour = 0
-    return Object
+    return recipe
     // because it says Message:Expected object not to have properties milk: ''
   } else {
-    const improvedObject = {
-      eggs: Object.eggs * portions,
-      milk: Object.milk * portions,
-      sugar: Object.milk * portions,
-      flour: Object.flour * portions
+    for (let i = 0; i < newobj.length; i++) {
+      recipe[newobj[i]] = recipe[newobj[i]] * portions
     }
-    return improvedObject
   }
+  return recipe
 }
 
 // Don't change the code below this line
