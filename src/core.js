@@ -5,6 +5,24 @@
 // "The cake is still baking!" if there are any remaining minutes left,
 // or "You didn't set a timer!" if no value is provided to the parameter
 
+function timerStatus(remainginMinutes){
+ if (remainginMinutes === 0){
+  return "Phil's cake is ready!"
+ }
+ else if (remainginMinutes > 0) {
+  return "The cake is still baking!"
+ } 
+ else {
+  return "You didn't set a timer!"
+ }
+}
+let remainginMinutes = 12
+let readyOrNot = timerStatus(remainginMinutes)
+console.log(readyOrNot)  
+
+
+
+
 // 2. To help Phil prepare ahead of time, create a function named estimatePrepTime
 // that accepts two parameters:
 // - an array of ingredients (e.g. ["sugar", "milk", "flour", "eggs"])
@@ -14,6 +32,16 @@
 // If no prep time per ingredient is provided, the function should assume each ingredient
 // takes 2 minutes to prepare
 
+
+function estimatePrepTime(ingredients, prepTimeIngredients = 2){
+  const totalPrepTime = ingredients.length * prepTimeIngredients
+  return totalPrepTime
+}
+let prepTimeIngredients = undefined
+const ingredients = ["sugar", "milk", "flour", "eggs", "salt"]
+const timeCalculation = estimatePrepTime(ingredients, prepTimeIngredients)
+console.log(timeCalculation)
+
 // 3. Phil needs to know the quantity of milk and eggs to use! Create a function
 // named calculateQuantities which accepts two parameters:
 // - a list of ingredients
@@ -22,7 +50,30 @@
 // The function should always return an object with two keys: sugar, eggs
 // The values of the keys should be the total amount of sugar and eggs needed for the cake.
 // If sugar or eggs are not present in the list of ingredients, the value for the key should be 0
-//
+
+function calculateQuantities(ingredients, layers){
+  const sugarPerLayer = 100
+  const eggsPerLayer = 2
+
+  let sugarNeeded = 0
+  let eggsNeeded = 0
+
+  if (ingredients.includes('sugar')){
+    sugarNeeded = sugarPerLayer * layers
+  }
+
+  if (ingredients.includes('eggs')){
+    eggsNeeded = eggsPerLayer * layers
+  }
+  return{
+    'sugar': sugarNeeded,
+    'eggs' : eggsNeeded 
+}
+  }
+let layers =  3
+let amounts = calculateQuantities(ingredients, layers)
+console.log(amounts)
+
 // Example:
 // calculateQuantities(["sugar", "milk", "eggs"], 2)
 // returns: { sugar: 200, eggs: 4 }
@@ -43,6 +94,28 @@
 // improveRecipe({ eggs: 2, milk: 100, sugar: 200 }, 3)
 // returns: { eggs: 6, milk: 300, sugar: 600 }
 
+function improveRecipe(recipe, portions){
+  let improveRecipe = {}
+ 
+
+for (let ingredient in recipe){
+  improveRecipe[ingredient] = recipe[ingredient] * portions
+}
+
+return improveRecipe
+}
+const recipe = {
+  eggs: 2,
+  milk: 100,
+  sugar: 200,
+  flour: 160
+}
+let portions = 3
+const newRecipe = improveRecipe(recipe, portions)
+console.log(newRecipe)
+
+
+
 // Don't change the code below this line
 module.exports = {
   /* eslint-disable no-undef */
@@ -50,7 +123,7 @@ module.exports = {
   /* eslint-disable no-undef */
   estimatePrepTime,
   /* eslint-disable no-undef */
-  calculateQuantities,
+ calculateQuantities,
   /* eslint-disable no-undef */
-  improveRecipe
+ improveRecipe
 }
