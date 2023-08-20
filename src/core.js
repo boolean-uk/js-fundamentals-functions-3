@@ -4,7 +4,7 @@
 // The function must return "Phil's cake is ready!" if the remaining minutes is 0,
 // "The cake is still baking!" if there are any remaining minutes left,
 // or "You didn't set a timer!" if no value is provided to the parameter
-
+// laptop clone test
 const timerStatus = remaining => {
   if (remaining === 0) {
     return "Phil's cake is ready!"
